@@ -1042,7 +1042,7 @@ def test_product_form_assign_collection_to_product(product):
     assert collection.products.first().name == product.name
 
 
-@pytest.skip('This feature was removed.')
+@pytest.mark.skip('This feature was removed.')
 def test_product_form_sanitize_product_description(
         product_type, default_category):
     product = Product.objects.create(
