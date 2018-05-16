@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load staticfiles %}
-{% load price_range from taxed_prices %}
+{% load price from taxed_prices %}
 {% load product_first_image from product_images %}
 {% load get_thumbnail from product_images %}
 
@@ -17,7 +17,7 @@
       </div>
 
       <div class="panel-footer">
-        {% price_range availability.price_range %}
+        {% price product.price force_taxed=True force_from=product %}
 
         {% if availability.on_sale %}
           <div class="product-list__sale">
