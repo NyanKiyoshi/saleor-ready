@@ -26,7 +26,6 @@ def tax_rate(taxes, rate_name):
 
 @register.inclusion_tag('price.html', takes_context=True)
 def price(context, base, display_gross=None, html=True):
-
     if isinstance(base, (TaxedMoney, TaxedMoneyRange)):
         if display_gross is None:
             display_gross = context['site'].settings.display_gross_prices
