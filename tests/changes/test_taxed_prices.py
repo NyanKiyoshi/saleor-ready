@@ -5,7 +5,7 @@ from collections import namedtuple
 
 from prices import Money
 
-from saleor.core.templatetags.taxed_prices import price
+from saleor.core.templatetags.taxed_prices import product_start_price
 
 Request = namedtuple('Request', ('taxes', ))
 
@@ -18,7 +18,7 @@ Request = namedtuple('Request', ('taxes', ))
         (True, True, Decimal('10.00')),
     )
 )
-def test_price_forced_handles_vat(
+def test_product_start_price(
         product, taxes, site_settings,
         include_taxes_in_prices, display_gross_prices, expected_price):
     """
@@ -32,8 +32,7 @@ def test_price_forced_handles_vat(
 
     ctx = {
         'request': Request(taxes=taxes), 'site': site_settings.site}
-    taxed_price = price(
-        ctx, product.price, force_taxed=True, force_from=product)['price']
+    taxed_price = product_start_price(ctx, product)['price']
 
     assert isinstance(taxed_price, Money)
     assert taxed_price.amount == expected_price
